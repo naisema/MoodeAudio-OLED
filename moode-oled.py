@@ -16,6 +16,7 @@ from PIL import ImageDraw
 # MPD Clint
 from mpd import MPDClient, MPDError, CommandError
 
+# System UTF-8
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
@@ -99,7 +100,7 @@ class MPDFetch(object):
                 frequency = str( float(frequency) / 1000 )
             bitrate = song_stats['bitrate']
 
-            audio_info =  bit + "bit " + frequency + "kHz   " + bitrate + "kbps"
+            audio_info =  bit + "bit " + frequency + "kHz  " + bitrate + "kbps"
         else:
             audio_info = ""
 
