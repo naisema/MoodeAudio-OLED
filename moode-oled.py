@@ -13,7 +13,7 @@ from PIL import ImageFont
 from PIL import ImageDraw
 
 # MPD Clint
-from mpd import MPDClient
+from mpd import MPDClient, MPDError, CommandError
 
 # Raspberry Pi pin configuration:
 RST = 24
@@ -25,25 +25,120 @@ SPI_DEVICE = 0
 # 128x64 display with hardware I2C:
 disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST)
 
-# Initialize Library
-disp.begin()
+# MPD Client
+class MPDFetch(object):
+    def __init__(self, host='localhost', port=6600):
+        self._mpd_client = MPDClient()
+        self._mpd_client.timeout = 10
 
-# Get display width and height.
-width = disp.width
-height = disp.height
+        self._host = host
+        self._port = port
 
-# Clear display
-disp.clear()
-disp.display()
+    def connect(self):
+        self._mpd_client.connect(self._host, self._port)
 
-# Create image buffer.
-# Make sure to create image with mode '1' for 1-bit color.
-image = Image.new('1', (width, height))
+        while True:
+            self._mpd_client.status()
+            time.sleep(1)
 
-# Load default font.
-font_artist = ImageFont.truetype('arialuni.ttf', 14)
-font_title = ImageFont.truetype('arialuni.ttf', 12)
-font_info = ImageFont.truetype('arialuni.ttf', 10)
+    def disconnect(self):
+        self._mpd_client.close()
+        self._mpd_client.disconnect()
 
-# Create drawing object.
-draw = ImageDraw.Draw(image)
+    def _play_pause(self):
+        self._mpd_client.pause()
+        return False
+
+    def _next_track(self):
+        self._mpd_client.next()
+        return False
+
+    def _prev_track(self):
+        self._mpd_client.previous()
+        return False
+
+    def info(self):
+        song_info = self._mpd_client.currentsong()
+
+        # Artist Name
+        if 'artist' in song_info:
+            artist = song_info['artist']
+        else:
+            artist = 'Unknown Artist'
+        # Song Name
+        if 'title' in song_info:
+            title = song_info['title']
+        else:
+            title = 'Unknown Title'
+
+    def stat():
+        song_stats = self._mpd_client.status()
+
+        # Song time
+        elapsed = song_stats['elapsed']
+        duration = song_stats['duration']
+        countdown = float(duration) - float(elapsed)
+        m,s = divmod(float(countdown), 60)
+        h,m = divmod(m, 60)
+        time = "%d:%02d:%02d" % (h, m, s)
+
+        # Volume
+        vol = song_stats['volume']
+
+        # Audio
+        if 'audio' in song_stats:
+            bit = song_stats['audio'].split(':')[1]
+            frequency = song_stats['audio'].split(':')[0]
+            bitrate = song_stat['bitrate']
+
+            audio_info =  bit + "bit " + frequency + "kHz" + bitrate + "kbps"
+        else
+            audio_info = ""
+
+
+def main():
+    # Initialize Library
+    disp.begin()
+
+    # Get display width and height.
+    width = disp.width
+    height = disp.height
+
+    # Clear display
+    disp.clear()
+    disp.display()
+
+    # Create image buffer.
+    # Make sure to create image with mode '1' for 1-bit color.
+    image = Image.new('1', (width, height))
+
+    # Load default font.
+    font_artist = ImageFont.truetype('arialuni.ttf', 14)
+    font_title = ImageFont.truetype('arialuni.ttf', 12)
+    font_info = ImageFont.truetype('arialuni.ttf', 10)
+
+    # Create drawing object.
+    draw = ImageDraw.Draw(image)
+
+    # MPD Connect
+    client = MPDFetch()
+    client.start.connect()
+
+    # Draw data to display
+    while True:
+        # Clear image buffer by drawing a black filled box.
+        draw.rectangle((0,0,width,height), outline=0, fill=0)
+
+        # Draw text.
+        draw.text((0, top), unicode(artist).center(24,' '), font=font_artist, fill=255)
+        draw.text((0, top+15), unicode(title).center(24, ' '), font=font_title, fill=255)
+        draw.text((0, top+30), time, font=font_info, fill=255)
+        draw.text((86, top+30),"Vol " +  str(vol) , font=font_info, fill=255)
+        draw.text((0, top+45), song_info, font=font_info, fill=255)
+
+        # Draw the image buffer.
+        disp.image(image)
+        disp.display()
+
+        # Pause briefly before drawing next frame.
+        time.sleep(1)
