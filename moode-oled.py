@@ -2,6 +2,7 @@
 # Author: Suwat Saisema
 # Date: 5-Oct-2017
 
+import sys
 import time
 
 # Adafruit Library
@@ -29,7 +30,7 @@ disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST)
 class MPDFetch(object):
     def __init__(self, host='localhost', port=6600):
         self._mpd_client = MPDClient()
-        self._mpd_client.timeout = 10
+        #self._mpd_client.timeout = 10
 
         self._host = host
         self._port = port
@@ -95,6 +96,8 @@ class MPDFetch(object):
         else:
             audio_info = ""
 
+        return({'artist':artist, 'title':title, 'time':time, 'volume':int(vol), 'audio_info':audio_info})
+
 class FetchError(Exception):
     """Fatal fetch data error."""
 
@@ -155,21 +158,24 @@ def main():
         # Pause briefly before drawing next frame.
         time.sleep(1)
 
-if __name__ == "__main__":
-    import sys
-    try:
-        main()
+if __name__ == '__main__':
+    main()
 
-    # Catch fatal fetch data errors
-    except FetchError as e:
-        sys.stderr.write("Fatal fetch data error: %s" % e)
-        sys.exit(1)
-
-    # Catch all other non-exit errors
-    except Exception as e:
-        sys.stderr.write("Unexpected exception: %s" % e)
-        sys.exit(1)
-
-    # Catch the remaining exit errors
-    except:
-        sys.exit(0)
+# if __name__ == "__main__":
+#     import sys
+#     try:
+#         main()
+#
+#     # Catch fatal fetch data errors
+#     except FetchError as e:
+#         sys.stderr.write("Fatal fetch data error: %s" % e)
+#         sys.exit(1)
+#
+#     # Catch all other non-exit errors
+#     except Exception as e:
+#         sys.stderr.write("Unexpected exception: %s" % e)
+#         sys.exit(1)
+#
+#     # Catch the remaining exit errors
+#     except:
+#         sys.exit(0)
