@@ -58,7 +58,8 @@ class MPDFetch(object):
         self._mpd_client.previous()
         #return False
 
-    def info(self):
+    def fetch(self):
+        # MPD current song
         song_info = self._mpd_client.currentsong()
 
         # Artist Name
@@ -72,7 +73,7 @@ class MPDFetch(object):
         else:
             title = 'Unknown Title'
 
-    def stat():
+        # MPD Status
         song_stats = self._mpd_client.status()
 
         # Song time
@@ -135,14 +136,12 @@ def main():
         draw.rectangle((0,0,width,height), outline=0, fill=0)
 
         # Fetch data
-        info = client.info()
+        info = client.fetch()
         artist = info['artist']
         title = info['title']
-
-        stat = client.stat()
-        time = stat['time']
-        vol = stat['vol']
-        audio = stat['audio_info']
+        time = info['time']
+        vol = info['vol']
+        audio = info['audio_info']
 
         # Draw text.
         draw.text((0, ), unicode(artist).center(24,' '), font=font_artist, fill=255)
