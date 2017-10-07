@@ -78,9 +78,7 @@ class MPDFetch(object):
 
         # Song time
         elapsed = song_stats['elapsed']
-        duration = song_stats['duration']
-        countdown = float(duration) - float(elapsed)
-        m,s = divmod(float(countdown), 60)
+        m,s = divmod(float(elapsed), 60)
         h,m = divmod(m, 60)
         eltime = "%d:%02d:%02d" % (h, m, s)
 
