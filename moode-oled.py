@@ -82,7 +82,7 @@ class MPDFetch(object):
         countdown = float(duration) - float(elapsed)
         m,s = divmod(float(countdown), 60)
         h,m = divmod(m, 60)
-        time = "%d:%02d:%02d" % (h, m, s)
+        eltime = "%d:%02d:%02d" % (h, m, s)
 
         # Volume
         vol = song_stats['volume']
@@ -97,7 +97,7 @@ class MPDFetch(object):
         else:
             audio_info = ""
 
-        return({'artist':artist, 'title':title, 'time':time, 'volume':int(vol), 'audio_info':audio_info})
+        return({'artist':artist, 'title':title, 'eltime':eltime, 'volume':int(vol), 'audio_info':audio_info})
 
 class FetchError(Exception):
     """Fatal fetch data error."""
@@ -139,14 +139,14 @@ def main():
         info = client.fetch()
         artist = info['artist']
         title = info['title']
-        time = info['time']
+        eltime = info['eltime']
         vol = info['volume']
         audio = info['audio_info']
 
         # Draw text.
         draw.text((0,0), unicode(artist).center(24,' '), font=font_artist, fill=255)
         draw.text((0,15), unicode(title).center(24, ' '), font=font_title, fill=255)
-        draw.text((0,30), time, font=font_info, fill=255)
+        draw.text((0,30), eltime, font=font_info, fill=255)
         draw.text((86,30),"Vol " +  str(vol) , font=font_info, fill=255)
         draw.text((0,45), audio, font=font_info, fill=255)
 
