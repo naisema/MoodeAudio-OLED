@@ -95,6 +95,8 @@ class MPDFetch(object):
         else:
             audio_info = ""
 
+class PollerError(Exception):
+    """Fatal fetch data error."""
 
 def main():
     # Initialize Library
@@ -148,8 +150,8 @@ if __name__ == "__main__":
     try:
         main()
 
-    # Catch fatal poller errors
-    except PollerError as e:
+    # Catch fatal fetch data errors
+    except FetchError as e:
         sys.stderr.write("Fatal fetch data error: %s" % e)
         sys.exit(1)
 
