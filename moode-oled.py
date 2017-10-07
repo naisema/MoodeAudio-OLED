@@ -91,7 +91,7 @@ class MPDFetch(object):
         if 'audio' in song_stats:
             bit = song_stats['audio'].split(':')[1]
             frequency = song_stats['audio'].split(':')[0]
-            bitrate = song_stat['bitrate']
+            bitrate = song_stats['bitrate']
 
             audio_info =  bit + "bit " + frequency + "kHz" + bitrate + "kbps"
         else:
