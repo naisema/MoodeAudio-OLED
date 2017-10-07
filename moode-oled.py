@@ -142,3 +142,22 @@ def main():
 
         # Pause briefly before drawing next frame.
         time.sleep(1)
+
+if __name__ == "__main__":
+    import sys
+    try:
+        main()
+
+    # Catch fatal poller errors
+    except PollerError as e:
+        sys.stderr.write("Fatal fetch data error: %s" % e)
+        sys.exit(1)
+
+    # Catch all other non-exit errors
+    except Exception as e:
+        sys.stderr.write("Unexpected exception: %s" % e)
+        sys.exit(1)
+
+    # Catch the remaining exit errors
+    except:
+        sys.exit(0)
