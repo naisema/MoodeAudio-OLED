@@ -132,11 +132,11 @@ def main():
         draw.rectangle((0,0,width,height), outline=0, fill=0)
 
         # Draw text.
-        draw.text((0, top), unicode(artist).center(24,' '), font=font_artist, fill=255)
-        draw.text((0, top+15), unicode(title).center(24, ' '), font=font_title, fill=255)
-        draw.text((0, top+30), time, font=font_info, fill=255)
-        draw.text((86, top+30),"Vol " +  str(vol) , font=font_info, fill=255)
-        draw.text((0, top+45), song_info, font=font_info, fill=255)
+        draw.text((0, ), unicode(artist).center(24,' '), font=font_artist, fill=255)
+        draw.text((0,15), unicode(title).center(24, ' '), font=font_title, fill=255)
+        draw.text((0,30), time, font=font_info, fill=255)
+        draw.text((86,30),"Vol " +  str(vol) , font=font_info, fill=255)
+        draw.text((0,45), song_info, font=font_info, fill=255)
 
         # Draw the image buffer.
         disp.image(image)
