@@ -124,7 +124,7 @@ def main():
 
     # MPD Connect
     client = MPDFetch()
-    client.start.connect()
+    client.connect()
 
     # Draw data to display
     while True:
