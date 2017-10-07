@@ -124,9 +124,9 @@ def main():
     image = Image.new('1', (width, height))
 
     # Load default font.
-    font_artist = ImageFont.truetype('arialuni.ttf', 13)
-    font_title = ImageFont.truetype('arialuni.ttf', 12)
-    font_info = ImageFont.truetype('arialuni.ttf', 10)
+    font_artist = ImageFont.truetype('arialuni.ttf', 14)
+    font_title = ImageFont.truetype('arialuni.ttf', 13)
+    font_info = ImageFont.truetype('arialuni.ttf', 12)
 
     # Create drawing object.
     draw = ImageDraw.Draw(image)
