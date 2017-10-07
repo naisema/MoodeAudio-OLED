@@ -148,7 +148,7 @@ def main():
         # Draw text.
         draw.text((0,0), unicode(artist).center(24,' '), font=font_artist, fill=255)
         draw.text((0,15), unicode(title).center(24, ' '), font=font_title, fill=255)
-        draw.text((0,30), "▷:" eltime, font=font_info, fill=255)
+        draw.text((0,30), eltime, font=font_info, fill=255)
         draw.text((86,30),"Vol " +  str(vol) , font=font_info, fill=255)
         draw.text((0,45), audio, font=font_info, fill=255)
 
