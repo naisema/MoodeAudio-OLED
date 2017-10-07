@@ -37,9 +37,9 @@ class MPDFetch(object):
     def connect(self):
         self._mpd_client.connect(self._host, self._port)
 
-        while True:
-            self._mpd_client.status()
-            time.sleep(1)
+        #while True:
+        #    self._mpd_client.status()
+        #    time.sleep(1)
 
     def disconnect(self):
         self._mpd_client.close()
@@ -47,15 +47,15 @@ class MPDFetch(object):
 
     def _play_pause(self):
         self._mpd_client.pause()
-        return False
+        #return False
 
     def _next_track(self):
         self._mpd_client.next()
-        return False
+        #return False
 
     def _prev_track(self):
         self._mpd_client.previous()
-        return False
+        #return False
 
     def info(self):
         song_info = self._mpd_client.currentsong()
