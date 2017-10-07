@@ -140,7 +140,7 @@ def main():
         artist = info['artist']
         title = info['title']
         time = info['time']
-        vol = info['vol']
+        vol = info['volume']
         audio = info['audio_info']
 
         # Draw text.
