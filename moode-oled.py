@@ -159,19 +159,19 @@ def main():
         time.sleep(1)
 
 if __name__ == "__main__":
-    try:
-        main()
-
-    # Catch fatal fetch data errors
-    except FetchError as e:
-        sys.stderr.write("Fatal fetch data error: %s" % e)
-        sys.exit(1)
-
-    # Catch all other non-exit errors
-    except Exception as e:
-        sys.stderr.write("Unexpected exception: %s" % e)
-        sys.exit(1)
-
-    # Catch the remaining exit errors
-    except:
-        sys.exit(0)
+    #try:
+    main()
+    #
+    # # Catch fatal fetch data errors
+    # except FetchError as e:
+    #     sys.stderr.write("Fatal fetch data error: %s" % e)
+    #     sys.exit(1)
+    #
+    # # Catch all other non-exit errors
+    # except Exception as e:
+    #     sys.stderr.write("Unexpected exception: %s" % e)
+    #     sys.exit(1)
+    #
+    # # Catch the remaining exit errors
+    # except:
+    #     sys.exit(0)
