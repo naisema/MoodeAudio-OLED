@@ -125,7 +125,7 @@ def main():
     # Load default font.
     font_artist = ImageFont.truetype('arialuni.ttf', 14)
     font_title = ImageFont.truetype('arialuni.ttf', 13)
-    font_info = ImageFont.truetype('arialuni.ttf', 12)
+    font_info = ImageFont.truetype('arialuni.ttf', 10)
 
     # Create drawing object.
     draw = ImageDraw.Draw(image)
@@ -154,9 +154,10 @@ def main():
         # Draw text.
         draw.text((0,0), unicode(artist).center(24,' '), font=font_artist, fill=255)
         draw.text((0,15), unicode(title).center(24, ' '), font=font_title, fill=255)
-        draw.text((0,30), eltime, font=font_info, fill=255)
-        draw.text((86,30),"Vol " +  str(vol) , font=font_info, fill=255)
-        draw.text((0,45), audio, font=font_info, fill=255)
+        draw.text((0,35), audio, font=font_info, fill=255)
+        draw.text((0,50), eltime, font=font_info, fill=255)
+        draw.text((86,50),"Vol " +  str(vol) , font=font_info, fill=255)
+
 
         # Draw the image buffer.
         disp.image(image)
