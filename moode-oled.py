@@ -95,7 +95,7 @@ class MPDFetch(object):
         else:
             audio_info = ""
 
-class PollerError(Exception):
+class FetchError(Exception):
     """Fatal fetch data error."""
 
 def main():
