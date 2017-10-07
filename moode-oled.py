@@ -16,6 +16,9 @@ from PIL import ImageDraw
 # MPD Clint
 from mpd import MPDClient, MPDError, CommandError
 
+reload(sys)
+sys.setdefaultencoding('utf-8')
+
 # Raspberry Pi pin configuration:
 RST = 24
 # Note the following are only used with SPI:
@@ -96,7 +99,7 @@ class MPDFetch(object):
                 frequency = str( float(frequency) / 1000 )
             bitrate = song_stats['bitrate']
 
-            audio_info =  bit + "bit " + frequency + "kHz " + bitrate + "kbps"
+            audio_info =  bit + "bit " + frequency + "kHz   " + bitrate + "kbps"
         else:
             audio_info = ""
 
@@ -137,6 +140,10 @@ def main():
 
         # Fetch data
         info = client.fetch()
+        if info is None:
+            draw.text((0,15), unicode(title).center(24, 'Music Stop...'), font=font_title, fill=255)
+            continue
+
         artist = info['artist']
         title = info['title']
         eltime = info['eltime']
