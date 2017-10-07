@@ -104,9 +104,6 @@ class MPDFetch(object):
 
         return({'artist':artist, 'title':title, 'eltime':eltime, 'volume':int(vol), 'audio_info':audio_info})
 
-class FetchError(Exception):
-    """Fatal fetch data error."""
-
 def main():
     # Initialize Library
     disp.begin()
@@ -151,7 +148,7 @@ def main():
         # Draw text.
         draw.text((0,0), unicode(artist).center(24,' '), font=font_artist, fill=255)
         draw.text((0,15), unicode(title).center(24, ' '), font=font_title, fill=255)
-        draw.text((0,30), eltime, font=font_info, fill=255)
+        draw.text((0,30), "▷:" eltime, font=font_info, fill=255)
         draw.text((86,30),"Vol " +  str(vol) , font=font_info, fill=255)
         draw.text((0,45), audio, font=font_info, fill=255)
 
@@ -163,19 +160,4 @@ def main():
         time.sleep(1)
 
 if __name__ == "__main__":
-    #try:
     main()
-    #
-    # # Catch fatal fetch data errors
-    # except FetchError as e:
-    #     sys.stderr.write("Fatal fetch data error: %s" % e)
-    #     sys.exit(1)
-    #
-    # # Catch all other non-exit errors
-    # except Exception as e:
-    #     sys.stderr.write("Unexpected exception: %s" % e)
-    #     sys.exit(1)
-    #
-    # # Catch the remaining exit errors
-    # except:
-    #     sys.exit(0)
