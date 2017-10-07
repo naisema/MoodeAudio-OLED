@@ -92,7 +92,7 @@ class MPDFetch(object):
             bitrate = song_stat['bitrate']
 
             audio_info =  bit + "bit " + frequency + "kHz" + bitrate + "kbps"
-        else
+        else:
             audio_info = ""
 
 
