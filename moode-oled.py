@@ -148,6 +148,7 @@ def main():
         info = client.fetch()
         state = info['state']
         eltime = info['eltime']
+        vol = info['volume']
 
         if state == 'stop':
             draw.text((0,50), state + ": ", font=font_title,fill=255)
@@ -158,7 +159,6 @@ def main():
 
         artist = info['artist']
         title = info['title']
-        vol = info['volume']
         audio = info['audio_info']
 
         # Draw text.
