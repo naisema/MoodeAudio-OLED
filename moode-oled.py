@@ -102,7 +102,7 @@ class MPDFetch(object):
                 frequency = str( float(frequency) / 1000 )
             bitrate = song_stats['bitrate']
 
-            audio_info =  bit + "bit " + frequency + "kHz (" + bitrate + "kbps)"
+            audio_info =  bit + "bit " + frequency + "kHz ( " + bitrate + "kbps)"
         else:
             audio_info = ""
 
