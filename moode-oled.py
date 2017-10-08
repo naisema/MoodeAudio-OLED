@@ -79,6 +79,8 @@ class MPDFetch(object):
 
         # MPD Status
         song_stats = self._mpd_client.status()
+        # State
+        state = song_stats['state']
 
         # Song time
         elapsed = song_stats['elapsed']
@@ -104,7 +106,7 @@ class MPDFetch(object):
         else:
             audio_info = ""
 
-        return({'artist':artist, 'title':title, 'eltime':eltime, 'volume':int(vol), 'audio_info':audio_info})
+        return({'state':state, 'artist':artist, 'title':title, 'eltime':eltime, 'volume':int(vol), 'audio_info':audio_info})
 
 def main():
     # Initialize Library
@@ -141,8 +143,9 @@ def main():
 
         # Fetch data
         info = client.fetch()
-        if info is None:
-            draw.text((0,15), unicode(title).center(24, 'Music Stop...'), font=font_title, fill=255)
+        state = info['state']
+        if state == 'stop':
+            draw.text((0,15), unicode("Music Stop...").center(24, ' '), font=font_title, fill=255)
             continue
 
         artist = info['artist']
