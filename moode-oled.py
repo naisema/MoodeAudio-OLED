@@ -102,7 +102,7 @@ class MPDFetch(object):
                 frequency = str( float(frequency) / 1000 )
             bitrate = song_stats['bitrate']
 
-            audio_info =  bit + "bit " + frequency + "kHz ( " + bitrate + "kbps)"
+            audio_info =  bit + "bit " + frequency + "kHz (" + bitrate + "kbps)"
         else:
             audio_info = ""
 
@@ -130,7 +130,7 @@ def main():
     # Load default font.
     font_artist = ImageFont.truetype('Arial-Unicode-Bold.ttf', 14)
     font_title = ImageFont.truetype('Arial-Unicode-Regular.ttf', 13)
-    font_info = ImageFont.truetype('Arial-Unicode-Italic.ttf', 9)
+    font_info = ImageFont.truetype('Arial-Unicode-Italic.ttf', 10)
 
     # Create drawing object.
     draw = ImageDraw.Draw(image)
