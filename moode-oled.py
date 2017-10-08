@@ -83,13 +83,13 @@ class MPDFetch(object):
         state = song_stats['state']
 
         # Song time
-        elapsed = song_stats['elapsed']
-        m,s = divmod(float(elapsed), 60)
-        h,m = divmod(m, 60)
-        eltime = "%d:%02d:%02d" % (h, m, s)
-
-        # Volume
-        vol = song_stats['volume']
+        if 'elaped' in song_stats:
+            elapsed = song_stats['elapsed']
+            m,s = divmod(float(elapsed), 60)
+            h,m = divmod(m, 60)
+            eltime = "%d:%02d:%02d" % (h, m, s)
+        else:
+            eltime =""
 
         # Audio
         if 'audio' in song_stats:
@@ -105,6 +105,9 @@ class MPDFetch(object):
             audio_info =  bit + "bit " + frequency + "kHz  " + bitrate + "kbps"
         else:
             audio_info = ""
+
+        # Volume
+        vol = song_stats['volume']
 
         return({'state':state, 'artist':artist, 'title':title, 'eltime':eltime, 'volume':int(vol), 'audio_info':audio_info})
 
