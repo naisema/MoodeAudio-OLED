@@ -89,7 +89,7 @@ class MPDFetch(object):
             h,m = divmod(m, 60)
             eltime = "%d:%02d:%02d" % (h, m, s)
         else:
-            eltime =""
+            eltime ="0:00:00"
 
         # Audio
         if 'audio' in song_stats:
@@ -155,17 +155,17 @@ def main():
 
         if state == 'stop':
             # Draw text
-            draw.text((0,50), state + ": ", font=font_title,fill=255)
+            draw.text((0,50), "||", font=font_title,fill=255)
             draw.text((5,50), eltime, font=font_title, fill=255)
-            draw.text((86,50), "Vol " +  str(vol) , font=font_title, fill=255)
+            draw.text((86,50), "vol: " +  str(vol) , font=font_title, fill=255)
         else:
             # Draw text.
             draw.text((0,0), unicode(artist).center(24,' '), font=font_artist, fill=255)
             draw.text((0,15), unicode(title).center(24, ' '), font=font_title, fill=255)
             draw.text((0,32), audio.center(24, ' '), font=font_info, fill=255)
-            draw.text((0,50), state + ": ", font=font_title,fill=255)
+            draw.text((0,50), " ► ", font=font_title,fill=255)
             draw.text((5,50), eltime, font=font_title, fill=255)
-            draw.text((86,50), "Vol " +  str(vol) , font=font_title, fill=255)
+            draw.text((86,50), "vol: " +  str(vol) , font=font_title, fill=255)
 
 
         # Draw the image buffer.
