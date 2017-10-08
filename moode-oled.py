@@ -161,7 +161,10 @@ def main():
 
         # Position
         titx,tity = draw.textsize(title, font=font_title)
-        posx = divmod(126-titx)
+        if titx < 126:
+            posx = divmod(126-titx,2)
+        else:
+            posx = 2
 
         if state == 'stop':
             # Draw text
