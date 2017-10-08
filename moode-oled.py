@@ -135,6 +135,12 @@ def main():
     # Create drawing object.
     draw = ImageDraw.Draw(image)
 
+    # First define some constants to allow easy resizing of shapes.
+    padding = 2
+    shape_width = 20
+    top = padding
+    bottom = height-padding
+
     # MPD Connect
     client = MPDFetch()
     client.connect()
@@ -155,15 +161,15 @@ def main():
 
         if state == 'stop':
             # Draw text
-            draw.text((0,15), ("Music Stop").center(24,' '), font=font_title, fill=255)
-            draw.text((0,50), eltime, font=font_title, fill=255)
+            draw.text((2,15), ("Music Stop"), font=font_title, fill=255)
+            draw.text((2,50), eltime, font=font_title, fill=255)
             draw.text((86,50), "vol: " +  str(vol) , font=font_title, fill=255)
         else:
             # Draw text.
-            draw.text((0,0), unicode(artist).center(24,' '), font=font_artist, fill=255)
-            draw.text((0,15), unicode(title).center(24, ' '), font=font_title, fill=255)
-            draw.text((0,32), audio.center(24, ' '), font=font_info, fill=255)
-            draw.text((0,50), eltime, font=font_title, fill=255)
+            draw.text((2,0), unicode(artist), font=font_artist, fill=255)
+            draw.text((2,18), unicode(title), font=font_title, fill=255)
+            draw.text((2,35), audio.center(24, ' '), font=font_info, fill=255)
+            draw.text((2,50), eltime, font=font_title, fill=255)
             draw.text((86,50), "vol: " +  str(vol) , font=font_title, fill=255)
 
         # Draw the image buffer.
