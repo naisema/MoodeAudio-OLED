@@ -159,6 +159,10 @@ def main():
         title = info['title']
         audio = info['audio_info']
 
+        # Position
+        titx,tity = draw.textsize(title, font=font_title)
+        posx = divmod(126-titx)
+
         if state == 'stop':
             # Draw text
             draw.text((2,15), ("Music Stop"), font=font_title, fill=255)
@@ -167,8 +171,8 @@ def main():
         else:
             # Draw text.
             draw.text((2,0), unicode(artist), font=font_artist, fill=255)
-            draw.text((2,18), unicode(title), font=font_title, fill=255)
-            draw.text((2,35), audio.center(24, ' '), font=font_info, fill=255)
+            draw.text((posx,18), unicode(title), font=font_title, fill=255)
+            draw.text((2,35), audio, font=font_info, fill=255)
             draw.text((2,50), eltime, font=font_title, fill=255)
             draw.text((86,50), "vol: " +  str(vol) , font=font_title, fill=255)
 
