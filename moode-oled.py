@@ -159,23 +159,37 @@ def main():
         title = info['title']
         audio = info['audio_info']
 
-        # Position
+        # Position text of Artist
+        artx,arty = draw.textsize(title, font=font_artist)
+        if artx < 126:
+            artx,arty = divmod((126-artx),2)
+        else:
+            artx = 2
+
+        # Position text of Title
         titx,tity = draw.textsize(title, font=font_title)
         if titx < 126:
-            posx = divmod(126-titx,2)
+            titx,tity = divmod((126-titx),2)
         else:
-            posx = 2
+            titx = 2
+
+        # Position text of audio infomation
+        audiox,audioy = draw.textsize(audio, font=font_info)
+        if audiox < 126:
+            audiox,audioy = divmod((126-audiox),2)
+        else:
+            audiox = 2
 
         if state == 'stop':
             # Draw text
-            draw.text((2,15), ("Music Stop"), font=font_title, fill=255)
+            draw.text((25,15), "Music Stop", font=font_title, fill=255)
             draw.text((2,50), eltime, font=font_title, fill=255)
             draw.text((86,50), "vol: " +  str(vol) , font=font_title, fill=255)
         else:
             # Draw text.
-            draw.text((2,0), unicode(artist), font=font_artist, fill=255)
-            draw.text((posx,18), unicode(title), font=font_title, fill=255)
-            draw.text((2,35), audio, font=font_info, fill=255)
+            draw.text((artx,0), unicode(artist), font=font_artist, fill=255)
+            draw.text((titx,18), unicode(title), font=font_title, fill=255)
+            draw.text((audiox,35), audio, font=font_info, fill=255)
             draw.text((2,50), eltime, font=font_title, fill=255)
             draw.text((86,50), "vol: " +  str(vol) , font=font_title, fill=255)
 
