@@ -102,7 +102,7 @@ class MPDFetch(object):
                 frequency = str( float(frequency) / 1000 )
             bitrate = song_stats['bitrate']
 
-            audio_info =  bit + "bit " + frequency + "kHz  " + bitrate + "kbps"
+            audio_info =  bit + "bit " + frequency + "kHz (" + bitrate + "kbps)"
         else:
             audio_info = ""
 
@@ -130,7 +130,7 @@ def main():
     # Load default font.
     font_artist = ImageFont.truetype('arialuni.ttf', 14)
     font_title = ImageFont.truetype('arialuni.ttf', 13)
-    font_info = ImageFont.truetype('arialuni.ttf', 10)
+    font_info = ImageFont.truetype('arialuni.ttf', 9)
 
     # Create drawing object.
     draw = ImageDraw.Draw(image)
@@ -148,7 +148,10 @@ def main():
         info = client.fetch()
         state = info['state']
         if state == 'stop':
-            draw.text((0,15), ("Music Stop...").center(24, ' '), font=font_title, fill=255)
+            draw.text((0,50), state + ": ", font=font_title,fill=255)
+            draw.text((5,50), eltime, font=font_title, fill=255)
+            draw.text((86,50), "Vol " +  str(vol) , font=font_title, fill=255)
+            time.sleep(1)
             continue
 
         artist = info['artist']
@@ -160,9 +163,10 @@ def main():
         # Draw text.
         draw.text((0,0), unicode(artist).center(24,' '), font=font_artist, fill=255)
         draw.text((0,15), unicode(title).center(24, ' '), font=font_title, fill=255)
-        draw.text((0,30), audio.center(24, ' '), font=font_info, fill=255)
-        draw.text((0,50), eltime, font=font_info, fill=255)
-        draw.text((86,50),"Vol " +  str(vol) , font=font_info, fill=255)
+        draw.text((0,32), audio.center(24, ' '), font=font_info, fill=255)
+        draw.text((0,50), state + ": ", font=font_title,fill=255)
+        draw.text((5,50), eltime, font=font_title, fill=255)
+        draw.text((86,50), "Vol " +  str(vol) , font=font_title, fill=255)
 
 
         # Draw the image buffer.
