@@ -149,25 +149,23 @@ def main():
         state = info['state']
         eltime = info['eltime']
         vol = info['volume']
-
-        if state == 'stop':
-            draw.text((0,50), state + ": ", font=font_title,fill=255)
-            draw.text((5,50), eltime, font=font_title, fill=255)
-            draw.text((86,50), "Vol " +  str(vol) , font=font_title, fill=255)
-            time.sleep(1)
-            continue
-
         artist = info['artist']
         title = info['title']
         audio = info['audio_info']
 
-        # Draw text.
-        draw.text((0,0), unicode(artist).center(24,' '), font=font_artist, fill=255)
-        draw.text((0,15), unicode(title).center(24, ' '), font=font_title, fill=255)
-        draw.text((0,32), audio.center(24, ' '), font=font_info, fill=255)
-        draw.text((0,50), state + ": ", font=font_title,fill=255)
-        draw.text((5,50), eltime, font=font_title, fill=255)
-        draw.text((86,50), "Vol " +  str(vol) , font=font_title, fill=255)
+        if state == 'stop':
+            # Draw text
+            draw.text((0,50), state + ": ", font=font_title,fill=255)
+            draw.text((5,50), eltime, font=font_title, fill=255)
+            draw.text((86,50), "Vol " +  str(vol) , font=font_title, fill=255)
+        else:
+            # Draw text.
+            draw.text((0,0), unicode(artist).center(24,' '), font=font_artist, fill=255)
+            draw.text((0,15), unicode(title).center(24, ' '), font=font_title, fill=255)
+            draw.text((0,32), audio.center(24, ' '), font=font_info, fill=255)
+            draw.text((0,50), state + ": ", font=font_title,fill=255)
+            draw.text((5,50), eltime, font=font_title, fill=255)
+            draw.text((86,50), "Vol " +  str(vol) , font=font_title, fill=255)
 
 
         # Draw the image buffer.
