@@ -155,6 +155,7 @@ def main():
 
         if state == 'stop':
             # Draw text
+            draw.text((0,15), ("Music Stop").center(24,' '), font=font_title, fill=255)
             draw.text((0,50), eltime, font=font_title, fill=255)
             draw.text((86,50), "vol: " +  str(vol) , font=font_title, fill=255)
         else:
