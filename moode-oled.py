@@ -161,14 +161,14 @@ def main():
         audio = info['audio_info']
 
         # Position text of Artist
-        artx,arty = draw.textsize(artist, font=font_artist)
+        artx,arty = draw.textsize(unicode(artist), font=font_artist)
         if artx < 126:
             artx,arty = divmod((126-artx),2)
         else:
             artx = 2
 
         # Position text of Title
-        titx,tity = draw.textsize(title, font=font_title)
+        titx,tity = draw.textsize(unicode(title), font=font_title)
         if titx < 126:
             titx,tity = divmod((126-titx),2)
         else:
