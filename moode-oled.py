@@ -141,6 +141,7 @@ def main():
     shape_width = 20
     top = padding
     bottom = height-padding
+    offset = 2
 
     # MPD Connect
     client = MPDFetch()
@@ -162,15 +163,20 @@ def main():
 
         # Position text of Artist
         artx,arty = draw.textsize(unicode(artist), font=font_artist)
-        if artx < 126:
-            artx,arty = divmod((126-artx),2)
+        if artx < width:
+            artx = (width - artx) / 2
+            offset = 2
         else:
-            artx = 2
+            artx = offset
+            if (artx - width) < -2:
+                offset = 2
+            else:
+                offset -= 2  
 
         # Position text of Title
         titx,tity = draw.textsize(unicode(title), font=font_title)
-        if titx < 126:
-            titx,tity = divmod((126-titx),2)
+        if titx < width:
+            titx = (width - titx) / 2
         else:
             titx = 2
 
