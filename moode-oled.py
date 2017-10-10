@@ -4,6 +4,7 @@
 
 import sys
 import time
+import os
 
 # Adafruit Library
 import Adafruit_GPIO.SPI as SPI
@@ -128,10 +129,10 @@ def main():
     image = Image.new('1', (width, height))
 
     # Load default font.
-    font_artist = ImageFont.truetype('Arial-Unicode-Bold.ttf', 14)
-    font_title = ImageFont.truetype('Arial-Unicode-Regular.ttf', 13)
-    font_info = ImageFont.truetype('Verdana-Italic.ttf', 10)
-    font_time = ImageFont.truetype('Verdana.ttf', 13)
+    font_artist = ImageFont.truetype('/home/pi/MoodeAudio-OLED/Arial-Unicode-Bold.ttf', 14)
+    font_title = ImageFont.truetype('/home/pi/MoodeAudio-OLED/Arial-Unicode-Regular.ttf', 13)
+    font_info = ImageFont.truetype('/home/pi/MoodeAudio-OLED/Verdana-Italic.ttf', 10)
+    font_time = ImageFont.truetype('/home/pi/MoodeAudio-OLED/Verdana.ttf', 13)
 
     # Create drawing object.
     draw = ImageDraw.Draw(image)
@@ -141,7 +142,9 @@ def main():
     shape_width = 20
     top = padding
     bottom = height-padding
-    offset = 2
+    artoffset = 2
+    titoffset = 2
+    animate = 15
 
     # MPD Connect
     client = MPDFetch()
@@ -162,23 +165,30 @@ def main():
         audio = info['audio_info']
 
         # Position text of Artist
-        artx,arty = draw.textsize(unicode(artist), font=font_artist)
-        if artx < width:
-            artx = (width - artx) / 2
-            offset = 2
+        artwd,artz = draw.textsize(unicode(artist), font=font_artist)
+	
+	# Artist animate    
+	if artwd < width:
+            artx = (width - artwd) / 2
+	    artoffset = padding
         else:
-            artx = offset
-            if (artx - width) < -2:
-                offset = 2
-            else:
-                offset -= 2  
-
+            artx = artoffset
+            #artoffset -= animate
+            #if (artwd - (width + abs(artx))) < -120:
+            #    artoffset = 100
+	
         # Position text of Title
-        titx,tity = draw.textsize(unicode(title), font=font_title)
-        if titx < width:
-            titx = (width - titx) / 2
+        titwd,titz = draw.textsize(unicode(title), font=font_title)
+       
+	# Title animate 
+	if titwd < width:
+            titx = (width - titwd) / 2
+	    titoffset = padding
         else:
-            titx = 2
+            titx = titoffset
+            titoffset -= animate
+	    if (titwd - (width + abs(titx))) < -120:
+		titoffset = 100
 
         # Position text of audio infomation
         audiox,audioy = draw.textsize(audio, font=font_info)
