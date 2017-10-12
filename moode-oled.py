@@ -5,6 +5,7 @@
 import sys
 import time
 import os
+from socket import error as socket_error
 
 # Adafruit Library
 import Adafruit_GPIO.SPI as SPI
