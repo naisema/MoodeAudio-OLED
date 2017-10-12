@@ -42,15 +42,15 @@ class MPDConnect(object):
         self._port = port
 
     def connect(self):
-        if not self.connected:
+        if not self._mpd_connected:
             try:
                 self._mpd_client.ping()
             except(socket_error, ConnectionError):
                 try:
                     self._mpd_client.connect(self._host, self._port)
-                    self.connected = True
+                    self._mpd_connected = True
                 except(socket_error, ConnectionError, CommandError):
-                    self.connected = False
+                    self._mpd_connected = False
 
     def disconnect(self):
         self._mpd_client.close()
