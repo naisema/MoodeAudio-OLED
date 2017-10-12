@@ -15,7 +15,7 @@ from PIL import ImageFont
 from PIL import ImageDraw
 
 # MPD Clint
-from mpd import MPDClient, MPDError, CommandError
+from mpd import MPDClient, MPDError, CommandError, ConnectionError
 
 # System UTF-8
 reload(sys)
@@ -32,20 +32,25 @@ SPI_DEVICE = 0
 disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST)
 
 # MPD Client
-class MPDFetch(object):
+class MPDConnect(object):
     def __init__(self, host='localhost', port=6600):
         self._mpd_client = MPDClient()
-        #self._mpd_client.timeout = 10
+        self._mpd_client.timeout = 10
+        self._mpd_connected = False
 
         self._host = host
         self._port = port
 
     def connect(self):
-        self._mpd_client.connect(self._host, self._port)
-
-        #while True:
-        #    self._mpd_client.status()
-        #    time.sleep(1)
+        if not self.connected:
+            try:
+                self._mpd_client.ping()
+            except(socket_error, ConnectionError):
+                try:
+                    self._mpd_client.connect(self._host, self._port)
+                    self.connected = True
+                except(socket_error, ConnectionError, CommandError):
+                    self.connected = False
 
     def disconnect(self):
         self._mpd_client.close()
@@ -147,7 +152,7 @@ def main():
     animate = 15
 
     # MPD Connect
-    client = MPDFetch()
+    client = MPDConnect()
     client.connect()
 
     # Draw data to display
@@ -166,8 +171,8 @@ def main():
 
         # Position text of Artist
         artwd,artz = draw.textsize(unicode(artist), font=font_artist)
-	
-	# Artist animate    
+
+	# Artist animate
 	if artwd < width:
             artx = (width - artwd) / 2
 	    artoffset = padding
@@ -176,11 +181,11 @@ def main():
             #artoffset -= animate
             #if (artwd - (width + abs(artx))) < -120:
             #    artoffset = 100
-	
+
         # Position text of Title
         titwd,titz = draw.textsize(unicode(title), font=font_title)
-       
-	# Title animate 
+
+	# Title animate
 	if titwd < width:
             titx = (width - titwd) / 2
 	    titoffset = padding
