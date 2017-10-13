@@ -13,4 +13,5 @@ Installation
 $ git clone https://github.com/naisema/MoodeAudio-OLED.git
 3. Go to MoodAudio UI menu -> Configure -> System -> Local Services -> LCD update engine
    fille full path of python script. On button and apply SET
+   ![ScreenShot](https://github.com/naisema/MoodeAudio-OLED/blob/developer/Python_LCD_setup.jpg?raw=true "Python LCD setup")
 4. Display can show information of songs
