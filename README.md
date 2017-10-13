@@ -3,6 +3,9 @@ OLED 128x64 for MoodeAudio
 
 ![ScreenShot](https://github.com/naisema/MoodeAudio-OLED/blob/developer/OLED%20128x64.jpg?raw=true "OLED 128x64 Display")
 
+[![OLED 128x64 Display](https://img.youtu.be/ZFla1naHdzA/0.jpg)](https://youtu.be/ZFla1naHdzA "OLED 126x64 Display")
+
+
 Installation
 
 1. Login to MoodeAudio with user pi and password moodeaudio
