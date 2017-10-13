@@ -1,7 +1,7 @@
 # MoodeAudio-OLED
 OLED 128x64 for MoodeAudio
 
-![ScreenShot]((https://github.com/naisema/MoodeAudio-OLED/blob/developer/OLED%20128x64.jpg?raw=true "OLED 128x64 Display")
+![ScreenShot](https://github.com/naisema/MoodeAudio-OLED/blob/developer/OLED%20128x64.jpg?raw=true "OLED 128x64 Display")
 
 Installation
 
