@@ -9,7 +9,7 @@ Let see on Youtube
 Installation
 
 1. Login to MoodeAudio with user pi and password moodeaudio
-2. Download python script from git
+2. Download python script from gi <br />
 $ git clone https://github.com/naisema/MoodeAudio-OLED.git
 3. Go to MoodAudio UI menu -> Configure -> System -> Local Services -> LCD update engine
    fille full path of python script. On button and apply SET
