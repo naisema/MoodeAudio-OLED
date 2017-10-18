@@ -11,7 +11,7 @@ Installation
 
 1. Login to MoodeAudio with user pi and password moodeaudio
 2. Ran raspi-config and enabled i2c
-3. Prerequites
+3. Prerequites <br />
    $ sudo apt-get update <br />
    $ sudo apt-get install build-essential python-pip python-dev python-smbus git python-imaging <br />
 4. Adafruit Python GPIO Library <br />
